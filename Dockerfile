@@ -13,4 +13,6 @@ RUN curl https://get.acme.sh | sh
 
 EXPOSE 80 443
 
+RUN chmod +x /entrypoint.shs
+
 ENTRYPOINT ["/entrypoint.sh"]
