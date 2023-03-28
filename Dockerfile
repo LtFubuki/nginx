@@ -1,21 +1,16 @@
-# Use the official Nginx image as the base image
-FROM nginx:stable
+FROM nginx:alpine
 
-# Install necessary packages for certbot
-RUN apt-get update && \
-    apt-get install -y certbot python3-certbot-nginx
+RUN apk update && \
+    apk add --no-cache \
+      bash \
+      curl \
+      openssl
 
-# Remove the default Nginx configuration file
-RUN rm /etc/nginx/conf.d/default.conf
-
-# Copy the custom Nginx configuration file into the container
-COPY reverse-proxy.conf /etc/nginx/conf.d/
-
-# Copy the entrypoint script
 COPY entrypoint.sh /entrypoint.sh
+COPY default.conf /etc/nginx/conf.d/default.conf
 
-# Set the correct permissions for the entrypoint script
-RUN chmod +x /entrypoint.sh
+RUN curl https://get.acme.sh | sh
 
-# Set the entrypoint script as the executable
+EXPOSE 80 443
+
 ENTRYPOINT ["/entrypoint.sh"]
