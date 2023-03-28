@@ -7,7 +7,7 @@ EMAIL="youremail@example.com"
 mkdir -p /etc/nginx/certs
 
 # Obtain the SSL certificate
-certbot certonly --standalone --non-interactive --agree-tos --email "$EMAIL" -d "$DOMAIN" || true
+certbot certonly --standalone --non-interactive --agree-tos --email "$EMAIL" -d "$DOMAIN" --dry-run || true
 
 # Create symbolic links for the SSL certificates
 ln -sf /etc/letsencrypt/live/"$DOMAIN"/fullchain.pem /etc/nginx/certs/alicam.org.crt
