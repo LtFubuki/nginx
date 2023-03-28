@@ -10,7 +10,6 @@ RUN rm /etc/nginx/conf.d/default.conf
 
 # Add the http and events blocks to the main Nginx configuration file
 RUN sed -i 's#\(http {.*\)#\1\n    include /etc/nginx/conf.d/*.conf;#' /etc/nginx/nginx.conf
-RUN sed -i '/http {/i events {\n    worker_connections 1024;\n}\n' /etc/nginx/nginx.conf
 
 # Copy the custom Nginx configuration file into the container
 COPY nginx.conf /etc/nginx/conf.d/
