@@ -14,5 +14,8 @@ COPY nginx.conf /etc/nginx/conf.d/
 # Copy the entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 
+# Set the correct permissions for the entrypoint script
+RUN chmod +x /entrypoint.sh
+
 # Set the entrypoint script as the executable
 ENTRYPOINT ["/entrypoint.sh"]
