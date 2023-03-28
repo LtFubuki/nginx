@@ -10,7 +10,7 @@ mkdir -p /etc/nginx/certs /var/www/html
 export PATH="$HOME/.acme.sh:$PATH"
 
 # Obtain the SSL certificate
-acme.sh --issue --webroot /var/www/html --domain "$DOMAIN" --email "$EMAIL" --reloadcmd "nginx -s reload" || true
+acme.sh --issue --webroot /var/www/html --domain "$DOMAIN" --email "$EMAIL" --reloadcmd "nginx -s reload" --debug || true
 
 # Create symbolic links for the SSL certificates
 ln -sf "$HOME/.acme.sh/$DOMAIN/fullchain.cer" /etc/nginx/certs/alicam.org.crt
